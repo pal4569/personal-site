@@ -1,6 +1,6 @@
 import './SideBar.css'
-import sidebar_left from './../assets/sidebar_left.png'
-import sidebar_right from './../assets/sidebar_right.png'
+import sidebar_left from './../../assets/sidebar_left.png'
+import sidebar_right from './../../assets/sidebar_right.png'
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import '@fortawesome/fontawesome-free/css/all.min.css';
