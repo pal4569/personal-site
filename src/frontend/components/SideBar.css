@@ -1,0 +1,126 @@
+.sidebar-container {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  z-index: 0;
+  display: block;
+}
+
+.rectangle {
+  background: #1d2021;
+  position: relative;
+  height: 400vh;
+  width: 200px;
+  height: 999px;
+  padding: 0px;
+  z-index: 2;
+}
+
+.rectline {
+  background: #3c3836;
+  position: absolute;
+  top: 0px;
+  width: 201px;
+  height: 999px;
+  z-index: 1;
+}
+
+.sidebar-button {
+  position: absolute;
+  top: 40px;
+  left: 200px; 
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #282828;
+
+  z-index: 9999;       
+  isolation: isolate;
+}
+
+.sidebar-button img {
+  pointer-events: none; 
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar-content {
+  font-family: 'Inter', sans-serif;
+  color: #ebdbb2;
+  position:absolute
+}
+
+.sidebar-content:hover {
+  color: #fb4934;
+}
+
+.folder-container {
+  display: flex;
+  align-items: center;
+}
+
+.folder {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  color: #ebdbb2;
+  text-align: left;
+  transform: translateX(30%); 
+  position: relative; 
+  top: 0px;
+  margin-top: 5px;
+}
+
+.fas.fa-folder {
+  font-size: 24px;
+  color: black;
+  position: relative; 
+  z-index: 500;
+  left: 10px;
+  top: 5px;
+}
+
+.menu-sub-option {
+  font-family: 'Inter', sans-serif;
+  color: #ebdbb2;
+  position: relative; 
+  left: 10px;
+  top: 0%;
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  z-index: 10px;
+}
+
+.menu-sub-option:hover {
+  color: #fb4934;
+}
+
+.menu-option:hover {
+  color: #fb4934;
+}
+
+
+/**
+.menu-option:before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 16px;   
+  height: 16px;
+  background: url('./../assets/folder2.png') no-repeat center/contain;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+**/
+.sub-line {
+  display: grid;
+  background: #1d2021;
+  position: relative; 
+  left: 6%;
+  top: 0%;
+  gap: 4px;
+  width: 2px;
+}

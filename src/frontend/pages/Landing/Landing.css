@@ -1,0 +1,8 @@
+.title {
+    position: absolute;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    color: #d79921;
+    width: 100%;
+    left:0%;
+}

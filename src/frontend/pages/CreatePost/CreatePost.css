@@ -1,0 +1,95 @@
+.create-field {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  position: absolute;
+  top: 15%;          
+  left: 30%;              
+  transform: translateX(-50%); 
+  color: #fbf1c7;
+  border: 1px solid gray;
+
+  width: 750px; 
+  height: 100vh;          
+  text-align: left;
+  outline: none;
+  resize: none;
+  z-index: 1;
+  white-space: pre-wrap;
+}
+
+.preview {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  position: absolute;
+  top: 15%;          
+  left: 70%;              
+  transform: translateX(-50%); 
+  width: 750px; 
+  height: 100vh; 
+  text-align: left;
+  border: 1px solid gray;
+  background: #1d2021;
+  color: #fbf1c7;
+}
+
+.highlight {
+  background: #7c6f64;
+  position: absolute;
+  opacity: 0.5;
+  width: 750px;
+  height: 30px;
+  left: 30%;
+  transform: translateX(-50%); 
+  z-index: 0;
+  pointer-events: none;
+}
+
+.title {
+  display: inline-block;  /* shrinkwrap */
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: #fabd2f;
+  margin: 0 auto;         /* keeps it centered */
+}
+
+.pageContainer {
+  display: flex;
+  gap: 1rem; /* space between boxes */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.i-hate-css-so-much {
+  height: 30px;
+}
+
+.header1 {
+  color: #cc241d;
+  font-size: 48px;
+}
+
+.header2 {
+  color: #d79921;
+  font-size: 40px;
+}
+
+.header3 {
+  color: #98971a;
+  font-size: 32px;
+}
+
+.header4 {
+  color: #689d6a;
+  font-size: 24px;
+}
+
+.header5 {
+  color: #458488;
+  font-size: 16px;
+}
+
+.header6 {
+  color: #b16286;
+  font-size: 14px;
+}

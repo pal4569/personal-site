@@ -1,0 +1,28 @@
+.create-options {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.option:hover {
+  color: #cc241d;
+}
+
+.option {
+  color: #fbf1c7;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
