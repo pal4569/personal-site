@@ -1,3 +1,5 @@
+import './CreatePreview.css';
+
 interface PreviewProps {
   lines: string[];
 }

@@ -1,3 +1,5 @@
+import './CreateRaw.css'
+
 interface CreateRawProps {
   setLines: React.Dispatch<React.SetStateAction<string[]>>;
   setHighlightTop: React.Dispatch<React.SetStateAction<string>>;

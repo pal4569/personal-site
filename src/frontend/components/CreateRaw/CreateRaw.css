@@ -1,0 +1,18 @@
+.create-field {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  position: absolute;
+  top: 15%;          
+  left: 30%;              
+  transform: translateX(-50%); 
+  color: #fbf1c7;
+  border: 1px solid gray;
+
+  width: 750px; 
+  height: 100vh;          
+  text-align: left;
+  outline: none;
+  resize: none;
+  z-index: 1;
+  white-space: pre-wrap;
+}

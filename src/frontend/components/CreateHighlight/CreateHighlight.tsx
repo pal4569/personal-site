@@ -1,3 +1,5 @@
+import './CreateHighlight.css'
+
 interface CreateHighlightProps {
   highlightTop: string;
 }
