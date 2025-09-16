@@ -1,55 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .sidebar-container {
-  position: absolute;
-  top: -5px;
+  font-family: 'Inter', sans-serif;
+  position: fixed;
   left: 0;
   z-index: 0;
-  display: block;
+  display: flex;
+  pointer-events: auto;
 }
 
 .rectangle {
   background: #1d2021;
   position: relative;
-  height: 400vh;
+  height: 800vh;
   width: 200px;
-  height: 999px;
+  height: 100vh;
   padding: 0px;
   z-index: 2;
+  pointer-events: auto;
 }
 
 .rectline {
   background: #3c3836;
-  position: absolute;
+  position: relative;
   top: 0px;
-  width: 201px;
-  height: 999px;
+  width: 1px;
+  height: 100vh;
   z-index: 1;
+  pointer-events: auto;
 }
 
 .sidebar-button {
-  position: absolute;
-  top: 40px;
-  left: 200px; 
-  width: 40px;
-  height: 40px;
-
+  position: absolute; 
+  top: 20px;
+  right: -48px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   background: #282828;
-
-  z-index: 9999;       
-  isolation: isolate;
+  border-radius: 6px;
+  z-index: 2000;
 }
 
-.sidebar-button img {
-  pointer-events: none; 
-  width: 40px;
-  height: 40px;
+.sidebar-button i {
+  font-size: 24px;
+  color: #ebdbb2;
 }
+
+.sidebar-button:hover i {
+  color: #fb4934;
+}
+
 
 .sidebar-content {
-  font-family: 'Inter', sans-serif;
   color: #ebdbb2;
   position:absolute
 }
@@ -64,7 +73,6 @@
 }
 
 .folder {
-  font-family: 'Inter', sans-serif;
   font-size: 20px;
   color: #ebdbb2;
   text-align: left;
@@ -102,19 +110,6 @@
   color: #fb4934;
 }
 
-
-/**
-.menu-option:before {
-  content: "";
-  position: absolute;
-  display: inline-block;
-  width: 16px;   
-  height: 16px;
-  background: url('./../assets/folder2.png') no-repeat center/contain;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-**/
 .sub-line {
   display: grid;
   background: #1d2021;

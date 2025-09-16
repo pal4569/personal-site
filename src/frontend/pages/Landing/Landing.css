@@ -5,4 +5,5 @@
     color: #d79921;
     width: 100%;
     left:0%;
+    pointer-events: none;
 }

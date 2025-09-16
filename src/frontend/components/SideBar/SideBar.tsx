@@ -1,6 +1,4 @@
 import './SideBar.css'
-import sidebar_left from './../../assets/sidebar_left.png'
-import sidebar_right from './../../assets/sidebar_right.png'
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -30,10 +28,7 @@ export default function SideBar() {
         className="sidebar-button"
         onClick={() => setSidebarToggle(!sidebarToggle)}
       >
-        <img
-          src={sidebarToggle ? sidebar_right : sidebar_left}
-          alt="toggle sidebar"
-        />
+        <i className={`fas ${sidebarToggle ? "fa-chevron-left" : "fa-chevron-right"}`} />
       </div>
     </motion.aside>
   );
