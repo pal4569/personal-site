@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./CreatePost.css";
+import "./BlogEditor.css";
 import CreateOptions from "../../components/CreateOptions/CreateOptions";
 import CreatePreview from "../../components/CreatePreview/CreatePreview";
 import CreateHighlight from "../../components/CreateHighlight/CreateHighlight";
 import CreateRaw from "../../components/CreateRaw/CreateRaw";
 
-export default function CreatePost() {
+export default function PostEditor() {
   const [lines, setLines] = useState<string[]>([]);
   const [title] = useState<string>("Untitled");
   const [highlightTop, setHighlightTop] = useState("300px");
@@ -13,7 +13,7 @@ export default function CreatePost() {
   return (
     <div className="pageContainer">
       <h1
-        className="title"
+        className="postTitle"
         contentEditable
         suppressContentEditableWarning
       >

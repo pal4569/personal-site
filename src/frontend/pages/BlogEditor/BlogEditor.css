@@ -1,5 +1,4 @@
-.title {
-  display: inline-block;  /* shrinkwrap */
+.postTitle {
   text-align: center;
   font-family: 'Inter', sans-serif;
   color: #fabd2f;
@@ -9,7 +8,8 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem
+  align-items: center;
+  padding-top: 2rem;  
 }
 
 .editorContainer {
