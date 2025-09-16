@@ -1,14 +1,16 @@
 .preview {
   font-family: 'Inter', sans-serif;
   font-size: 20px;
-  position: absolute;
-  top: 15%;          
-  left: 70%;              
-  transform: translateX(-50%); 
-  width: 750px; 
-  height: 100vh; 
-  text-align: left;
   border: 1px solid gray;
   background: #1d2021;
   color: #fbf1c7;
+  text-align: left;
+
+  /***
+  top: 15%;          
+  left: 70%;              
+  transform: translateX(-50%); 
+  ***/
+  width: 750px; 
+  height: 100vh; 
 }

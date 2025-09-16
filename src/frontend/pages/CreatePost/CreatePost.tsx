@@ -22,13 +22,16 @@ export default function CreatePost() {
 
       <CreateOptions blog_content={lines} title={title} />
 
-      <CreateHighlight
-        highlightTop={highlightTop}
-      />
-      <CreateRaw 
-        setLines={setLines}
-        setHighlightTop={setHighlightTop} />
-      <CreatePreview lines={lines} />
+      <div className="editorContainer">
+        <div className="rawContainer">
+          <CreateRaw 
+            setLines={setLines}
+            setHighlightTop={setHighlightTop} 
+          />
+          <CreateHighlight highlightTop={highlightTop} />
+        </div>
+        <CreatePreview lines={lines} />
+      </div>
     </div>
   );
 }

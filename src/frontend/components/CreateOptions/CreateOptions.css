@@ -1,13 +1,10 @@
 .create-options {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  
+  position: relative;
   display: flex;
   gap: 20px;
   justify-content: center;
   align-items: center;
+  margin-top: 3rem;
 }
 
 .option:hover {

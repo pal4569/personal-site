@@ -1,11 +1,9 @@
 .highlight {
   background: #7c6f64;
-  position: absolute;
+  position: relative;
   opacity: 0.5;
-  width: 750px;
+  width: 751px;
   height: 30px;
-  left: 30%;
-  transform: translateX(-50%); 
   z-index: 0;
   pointer-events: none;
 }

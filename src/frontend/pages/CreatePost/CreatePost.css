@@ -8,10 +8,27 @@
 
 .pageContainer {
   display: flex;
-  gap: 1rem; /* space between boxes */
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 2rem
+}
+
+.editorContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* centers children horizontally */
+  align-items: flex-start; /* align to top (or use center for vertical centering too) */
+  gap: 1rem;
+}
+
+.editorContainer > * {
+  flex: 0 0 auto; /* don’t grow or shrink */
+}
+
+.rawContainer {
+  position: relative;
+  flex: 0 0 auto;
+  width: 750px; 
+  height: 100px;       /* match Raw height */
 }
 
 .i-hate-css-so-much {
