@@ -14,9 +14,9 @@ export default function SideBar() {
       transition={{ duration: 0.5 }}
     >
       <div className="rectangle">
-        <div className="folder-container">
-          <i className="fas fa-folder" />
-          <div className="folder">Home</div>
+        <div className="file-container">
+          <i className="fas fa-file-alt" />
+          <div className="file">Home</div>
         </div>
         <div className="folder-container">
           <i className="fas fa-folder" />
