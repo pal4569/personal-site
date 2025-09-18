@@ -1,0 +1,75 @@
+.folder-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.folder-container {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  gap: 0.3rem;
+}
+
+.subline-container {
+  position: relative
+}
+
+.folder {
+  font-size: 20px;
+  color: #ebdbb2;
+  text-align: left;
+  margin: 0 0;
+}
+
+.folder:hover {
+  color: #fb4934;
+}
+
+.rest-container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+}
+
+.folder-icon-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+
+.fas.fa-folder {
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+}
+
+.fa-folder-open {
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+}
+
+.subline {
+  position: absolute;
+  background-color: red;
+  width: 2px;
+}
+
+.children-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  gap: 4px;
+}
+
+.children-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.children-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

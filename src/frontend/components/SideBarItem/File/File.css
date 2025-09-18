@@ -1,0 +1,23 @@
+.file-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+
+.file {
+  font-size: 20px;
+  color: #ebdbb2;
+  margin: 0 0;
+}
+
+.file:hover {
+  color: #fb4934;
+}
+
+.fas.fa-file-alt {
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+}
+

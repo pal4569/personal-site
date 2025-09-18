@@ -5,7 +5,7 @@ body {
 
 .sidebar-container {
   font-family: 'Inter', sans-serif;
-  position: fixed;
+  position: relative;
   left: 0;
   z-index: 0;
   display: flex;
@@ -55,90 +55,4 @@ body {
 
 .sidebar-button:hover i {
   color: #fb4934;
-}
-
-.sidebar-content {
-  color: #ebdbb2;
-  position:absolute
-}
-
-.sidebar-content:hover {
-  color: #fb4934;
-}
-
-.folder-container {
-  display: flex;
-  align-items: center;
-}
-
-.folder {
-  font-size: 20px;
-  color: #ebdbb2;
-  text-align: left;
-  transform: translateX(30%); 
-  position: relative; 
-  top: 0px;
-  margin-top: 5px;
-}
-
-.file {
-  font-size: 20px;
-  color: #ebdbb2;
-  text-align: left;
-  transform: translateX(30%); 
-  position: relative; 
-  top: 0px;
-  margin-top: 5px;
-}
-
-.file-container {
-  display: flex;
-  align-items: center;
-}
-
-.fas.fa-folder {
-  font-size: 24px;
-  color: black;
-  position: relative; 
-  z-index: 500;
-  left: 10px;
-  top: 5px;
-}
-
-.fas.fa-file-alt {
-  font-size: 20px;
-  color: black;
-  position: relative; 
-  z-index: 500;
-  left: 10px;
-  top: 3px;
-}
-
-.menu-sub-option {
-  font-family: 'Inter', sans-serif;
-  color: #ebdbb2;
-  position: relative; 
-  left: 10px;
-  top: 0%;
-  margin-top: 2.5px;
-  margin-bottom: 2.5px;
-  z-index: 10px;
-}
-
-.menu-sub-option:hover {
-  color: #fb4934;
-}
-
-.menu-option:hover {
-  color: #fb4934;
-}
-
-.sub-line {
-  display: grid;
-  background: #1d2021;
-  position: relative; 
-  left: 6%;
-  top: 0%;
-  gap: 4px;
-  width: 2px;
 }

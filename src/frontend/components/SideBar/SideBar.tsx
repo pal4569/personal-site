@@ -2,9 +2,59 @@ import './SideBar.css'
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import File from '../SideBarItem/File/File';
+import Folder from '../SideBarItem/Folder/Folder';
+import type { ItemProps } from '../SideBarItem/SidebarItem';
 
 export default function SideBar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
+
+  const layout: ItemProps[] = [
+    {
+      name: "Home",
+      type: "file",
+      navigation: "/",
+      level: 1
+    },
+    {
+      name: "Blog",
+      type: "folder",
+      level: 1,
+      children: [
+        {
+          name: "Silly",
+          type: "folder",
+          level: 2,
+          children: [
+            {
+              name: "SillyBilly1",
+              type: "file",
+              navigation: "/load/silly1",
+              level: 3
+            },
+            {
+              name: "SillyBilly2",
+              type: "file",
+              navigation: "/load/silly2",
+              level: 3
+            },
+          ],
+        },
+        {
+          name: "Load",
+          type: "file",
+          navigation: "/load",
+          level: 2
+        },
+      ],
+    },
+    {
+      name: "Home",
+      type: "file",
+      navigation: "/",
+      level: 1
+    }
+  ];
 
   return (
     <motion.aside
@@ -14,14 +64,33 @@ export default function SideBar() {
       transition={{ duration: 0.5 }}
     >
       <div className="rectangle">
-        <div className="file-container">
-          <i className="fas fa-file-alt" />
-          <div className="file">Home</div>
-        </div>
-        <div className="folder-container">
-          <i className="fas fa-folder" />
-          <div className="folder">Blogs</div>
-        </div>
+        {layout.map((element, i) => {
+          if (element.type === "file") {
+            return (
+              <File 
+                key={i}
+                type={'file'}
+                name={element.name} 
+                navigation={element.navigation}
+                level={element.level}
+              />
+            )
+          } 
+          else if (element.type === "folder") {
+            return (
+              <Folder 
+                key={i}
+                type={'folder'}
+                name={element.name}
+                children={element.children}
+                level={element.level}
+              />
+            );
+          } 
+          else {
+            throw new Error("Unrecognized sidebar type");
+          }
+        })}
       </div>
       <div className="rectline" />
       <div
@@ -33,5 +102,3 @@ export default function SideBar() {
     </motion.aside>
   );
 }
-
-
