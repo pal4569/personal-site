@@ -10,8 +10,7 @@ export default function File({name, navigation, level} : FileProps) {
             style={{ marginLeft: `${level * 0.5}rem` }}>
             <i className="fas fa-file-alt" />
             <div 
-                className="file"
-                style={{ color: location.pathname === navigation ? "#8ec07c" : "#ebdbb2" }}
+                className={`file ${location.pathname === navigation ? "active" : ""}`}
                 onClick={() => navigation && navigate(navigation)}
                 >{name}
             </div>

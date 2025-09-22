@@ -22,37 +22,18 @@ export default function SideBar() {
       level: 1,
       children: [
         {
-          name: "Silly",
-          type: "folder",
-          level: 2,
-          children: [
-            {
-              name: "SillyBilly1",
-              type: "file",
-              navigation: "/load/silly1",
-              level: 3
-            },
-            {
-              name: "SillyBilly2",
-              type: "file",
-              navigation: "/load/silly2",
-              level: 3
-            },
-          ],
+          name: "Create",
+          type: "file",
+          navigation: "/create",
+          level: 2
         },
         {
           name: "Load",
           type: "file",
-          navigation: "/load",
+          navigation: "/load/5",
           level: 2
         },
       ],
-    },
-    {
-      name: "Home",
-      type: "file",
-      navigation: "/",
-      level: 1
     }
   ];
 

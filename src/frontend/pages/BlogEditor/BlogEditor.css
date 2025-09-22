@@ -15,20 +15,13 @@
 .editorContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center; /* centers children horizontally */
-  align-items: flex-start; /* align to top (or use center for vertical centering too) */
+  justify-content: center; 
+  align-items: flex-start; 
   gap: 1rem;
-}
-
-.editorContainer > * {
-  flex: 0 0 auto; /* don’t grow or shrink */
 }
 
 .rawContainer {
   position: relative;
-  flex: 0 0 auto;
-  width: 750px; 
-  height: 100px;       /* match Raw height */
 }
 
 .i-hate-css-so-much {

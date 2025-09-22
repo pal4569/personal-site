@@ -8,11 +8,15 @@
 .file {
   font-size: 20px;
   color: #ebdbb2;
-  margin: 0 0;
+  transition: color 0.2s ease;
 }
 
 .file:hover {
   color: #fb4934;
+}
+
+.file.active {
+  color: #8ec07c;
 }
 
 .fas.fa-file-alt {
