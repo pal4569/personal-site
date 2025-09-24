@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { LoadOptions } from "../../components/LoadOptions/LoadOptions";
 import './LoadBlog.css';
 
 type Blog = {
@@ -50,12 +51,13 @@ export default function LoadBlog() {
   if (!lines || !blog) return <p>No blog found.</p>;
 
   return (
-    <div className="pagecontainer">
+    <div className="page-container">
       <h1 className="title">{blog.title}</h1>
       <div className="pre-content">
         <h3>By {blog.author}</h3>
         <small>Created: {new Date(blog.created_at).toLocaleString()}</small>
       </div>
+      <LoadOptions />
       <div className="load-field">
         {lines.map((line, i) => {
           const match = line.match(/^(#{1,6})\s+(.*)/);

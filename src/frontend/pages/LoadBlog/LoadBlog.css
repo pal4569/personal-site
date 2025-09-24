@@ -1,10 +1,12 @@
-.pagecontainer {
-  position: relative;
-  display: block;
-  margin: 50px;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem;
 }
 
 .title {
+  position: fixed;
   text-align: center;
   font-family: 'Inter', sans-serif;
   color: #fabd2f;
@@ -14,13 +16,9 @@
 }
 
 .pre-content {
-  position: absolute;
-  left: 50%;
-  top: 5%;
-  transform: translateX(-50%);
-  margin-top: 50px;
-
+  position: relative;
   display: flex;
+  flex-direction: row;
   gap: 1rem;
   align-items: center;
 }
@@ -28,21 +26,15 @@
 .load-field {
   font-family: 'Inter', sans-serif;
   font-size: 20px;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   color: #fbf1c7;
   border: 1px solid gray;
 
   line-height: 1.6;
-  margin-top: 100px;
 
   width: 900px;
   height: 100vh;
   text-align: left;
-  outline: none;
-  resize: none;
   z-index: 1;
   white-space: pre-wrap;
 }

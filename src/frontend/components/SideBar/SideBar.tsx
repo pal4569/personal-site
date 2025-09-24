@@ -5,37 +5,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import File from '../SideBarItem/File/File';
 import Folder from '../SideBarItem/Folder/Folder';
 import type { ItemProps } from '../SideBarItem/SidebarItem';
+import { useSideBarContent } from './SideBarContent/useSideBarContent';
 
 export default function SideBar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
-  const layout: ItemProps[] = [
-    {
-      name: "Home",
-      type: "file",
-      navigation: "/",
-      level: 1
-    },
-    {
-      name: "Blog",
-      type: "folder",
-      level: 1,
-      children: [
-        {
-          name: "Create",
-          type: "file",
-          navigation: "/create",
-          level: 2
-        },
-        {
-          name: "Load",
-          type: "file",
-          navigation: "/load/5",
-          level: 2
-        },
-      ],
-    }
-  ];
+  const layout: ItemProps[] = useSideBarContent();
 
   return (
     <motion.aside

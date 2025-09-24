@@ -63,6 +63,23 @@ app.get("/blogs/:id", async (req, res) => {
   }
 });
 
+app.get("/blogs/", async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT id, title FROM blogs`,
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "No blogs found" });
+    }
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching blogs:", err);
+    res.status(500).json({ error: "Failed to fetch blogs" });
+  }
+});
+
 
 initDb().catch(err => console.error("DB init failed:", err));
 
