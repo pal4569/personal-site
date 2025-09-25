@@ -13,7 +13,7 @@ export default function Folder({ name, children, level }: FolderProps) {
         <div 
           className="folder-container" 
           onClick={() => setExpanded(!expanded)}
-          style={{ marginLeft: `${level * 0.5}rem` }}>
+          style={{ marginLeft: `${((level - 1) * 0.6) + 0.5}rem` }}>
           <i className={`fas ${expanded ? "fa-folder-open" : "fa-folder"}`} />
           <div className="folder">{name}</div>
       </div>
@@ -30,7 +30,7 @@ export default function Folder({ name, children, level }: FolderProps) {
                     type={'file'}
                     name={element.name}
                     navigation={element.navigation!}
-                    level={level}
+                    level={level + 1}
                   />
                 );
               } else {
@@ -38,7 +38,7 @@ export default function Folder({ name, children, level }: FolderProps) {
                   <Folder
                     key={element.name}
                     {...element}
-                    level={level}
+                    level={level + 1}
                   />
                 );
               }

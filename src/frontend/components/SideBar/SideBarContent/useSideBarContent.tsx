@@ -18,18 +18,13 @@ export function useSideBarContent(): ItemProps[] {
         }
 
         const data: JustIdTitle[] = await res.json();
-        console.log("Blogs API response:", data);
-        console.log("State of data:")
         setBlogs(data);
-        console.log(data);
       } catch (err) {
         console.error("Loading blogs failed", err);
       }
     };
 
     fetchBlogContent();
-    console.log("State of blog:")
-    console.log(blogs)
   }, []);
 
   const layout: ItemProps[] = [

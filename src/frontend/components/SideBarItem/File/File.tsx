@@ -7,7 +7,7 @@ export default function File({name, navigation, level} : FileProps) {
     return (
         <div 
             className="file-container"
-            style={{ marginLeft: `${level * 0.5}rem` }}>
+            style={{ marginLeft: `${((level - 1) * 0.6) + 0.5}rem` }}>
             <i className="fas fa-file-alt" />
             <div 
                 className={`file ${location.pathname === navigation ? "active" : ""}`}

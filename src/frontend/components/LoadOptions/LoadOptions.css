@@ -1,8 +1,8 @@
 .load-options {
   position: relative;
-  gap: 20px;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .option:hover {
@@ -11,7 +11,6 @@
 
 .option {
   color: #fbf1c7;
-  padding: 10px;
   font-size: 20px;
   border: none;
   background: transparent;
