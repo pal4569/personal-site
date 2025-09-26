@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./BlogEditor.css";
 import CreateOptions from "../../components/CreateOptions/CreateOptions";
 import CreatePreview from "../../components/CreatePreview/CreatePreview";
@@ -19,28 +19,32 @@ export default function PostEditor() {
   const [title] = useState<string>("Untitled");
   const [highlightTop, setHighlightTop] = useState("300px");
   const { id } = useParams<{ id: string }>();
-  const fetchBlog = async () => {
-    try {
-      const res = await fetch(`http://localhost:5000/blogs/${id}`);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch blog: ${res.statusText}`);
-      }
-      const data: Blog = await res.json();
-      if (data) {
-        setLines(data.content.split("\n"));
-      }
-      console.log(data)
-    } 
-    catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Unknown error");
-      }
-    }
-  };
 
-  if(id) { fetchBlog(); }
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/blogs/${id}`);
+        if (!res.ok) {
+          throw new Error(`Failed to fetch blog: ${res.statusText}`);
+        }
+        const data: Blog = await res.json();
+        if (data) {
+          setLines(data.content.split("\n"));
+        }
+        console.log(data);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error");
+        }
+      }
+    };
+
+    if (id) {
+      fetchBlog();
+    }
+  }, [id]);
 
   return (
     <div className="pageContainer">
@@ -59,6 +63,7 @@ export default function PostEditor() {
           <CreateRaw 
             setLines={setLines}
             setHighlightTop={setHighlightTop} 
+            lines={lines}
           />
           <CreateHighlight highlightTop={highlightTop} />
         </div>
