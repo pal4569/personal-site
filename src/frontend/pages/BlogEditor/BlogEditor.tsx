@@ -23,7 +23,7 @@ export default function PostEditor() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/blogs/${id}`);
+        const res = await fetch(`http://localhost:5000/api/blogs/${id}`);
         if (!res.ok) {
           throw new Error(`Failed to fetch blog: ${res.statusText}`);
         }
@@ -44,7 +44,9 @@ export default function PostEditor() {
     if (id) {
       fetchBlog();
     }
-  }, [id]);
+
+  }, []);
+
 
   return (
     <div className="pageContainer">
@@ -56,8 +58,9 @@ export default function PostEditor() {
         {title}
       </h1>
 
-      <CreateOptions blog_content={lines} title={title} />
-
+      <CreateOptions 
+        blog_content={lines} 
+        title={title}/>
       <div className="editorContainer">
         <div className="rawContainer">
           <CreateRaw 

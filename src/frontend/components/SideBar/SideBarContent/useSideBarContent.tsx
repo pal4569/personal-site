@@ -12,7 +12,7 @@ export function useSideBarContent(): ItemProps[] {
   useEffect(() => {
     const fetchBlogContent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/blogs/`);
+        const res = await fetch(`http://localhost:5000/api/blogs`);
         if (!res.ok) {
           throw new Error(`Failed to fetch blogs: ${res.statusText}`);
         }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import './CreateOptions.css';
 
 export default function CreateOptions({
@@ -9,33 +9,24 @@ export default function CreateOptions({
   title: string;
 }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [savedState, setSavedState] = useState<string[]>([]);
-  const [saveDisable, setSaveDisable] = useState<boolean>(true);
-
-  // Watch for changes in blog_content to enable/disable Save button
-  useEffect(() => {
-    const isSame =
-      JSON.stringify(savedState) === JSON.stringify(blog_content);
-    setSaveDisable(isSame);
-  }, [blog_content, savedState]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedImage(URL.createObjectURL(file));
     }
+    console.log(blog_content);
   }
 
   async function handleSave() {
-    setSavedState(blog_content);
 
-    await fetch("http://localhost:5000/blogs", {
+    await fetch("http://localhost:5000/api/blogs/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         author: "Michael",
         title: title,
-        content: blog_content.join("\n"),
+        content: blog_content,
       })
     });
   }
@@ -45,7 +36,6 @@ export default function CreateOptions({
       <button
         className="option"
         onClick={handleSave}
-        disabled={saveDisable}
       >
         Save
       </button>

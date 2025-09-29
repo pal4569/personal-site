@@ -13,6 +13,7 @@ export default function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/create/" element={<BlogEditor />} />
             <Route path="/create/:id" element={<BlogEditor />} />
             <Route path="/load/:id" element={<LoadBlog />} />
           </Routes>
