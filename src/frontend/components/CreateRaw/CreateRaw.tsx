@@ -1,14 +1,12 @@
-import { useEffect, useRef } from 'react';
 import './CreateRaw.css'
 
 interface CreateRawProps {
   setLines: React.Dispatch<React.SetStateAction<string[]>>;
   setHighlightTop: React.Dispatch<React.SetStateAction<string>>;
-  lines: string[];
 }
 
-export default function CreateRaw({ setLines, setHighlightTop, lines }: CreateRawProps) {
-  const divRef = useRef<HTMLDivElement>(null);
+
+export default function CreateRaw({ setLines, setHighlightTop }: CreateRawProps) {
   
   function moveHighlight(event: React.MouseEvent<HTMLDivElement>) {
     const offset = 30;
@@ -18,15 +16,6 @@ export default function CreateRaw({ setLines, setHighlightTop, lines }: CreateRa
     const y_pos = snapped + "px";
     setHighlightTop(y_pos);
   }
-
-  useEffect(() => {
-    if (divRef.current) {
-      const newText = lines.join("\n");
-      if (divRef.current.innerText !== newText) {
-        divRef.current.innerText = newText;
-      }
-    }
-  }, [lines]);
 
 
   function handleInput(event: React.FormEvent<HTMLDivElement>) {
@@ -48,7 +37,6 @@ export default function CreateRaw({ setLines, setHighlightTop, lines }: CreateRa
     return (
     <>
         <div
-            ref={divRef}
             className="create-field"
             contentEditable
             suppressContentEditableWarning

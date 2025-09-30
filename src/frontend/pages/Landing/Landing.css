@@ -1,10 +1,28 @@
-.title {
-    position: absolute;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    color: #d79921;
-    width: 100%;
-    left:0%;
-    top: 0;
-    pointer-events: none;
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 1rem;
+}
+
+.landing-title {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: #fabd2f;
+}
+
+.landing-container img {
+  width: 200px;
+  border-radius: 100%;
+}
+
+p {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  position: relative;
+  color: #fbf1c7;
+  max-width: 800px;
+  margin: 0.5rem 0;
+  text-indent: 1em;
 }

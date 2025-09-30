@@ -66,7 +66,6 @@ export default function PostEditor() {
           <CreateRaw 
             setLines={setLines}
             setHighlightTop={setHighlightTop} 
-            lines={lines}
           />
           <CreateHighlight highlightTop={highlightTop} />
         </div>
