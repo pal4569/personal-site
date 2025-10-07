@@ -54,7 +54,7 @@ export default function LoadBlog() {
     <div className="page-container">
       <h1 className="title">{blog.title}</h1>
       <div className="pre-content">
-        <h3>By {blog.author}</h3>
+        <small>By {blog.author}</small>
         <small>Created: {new Date(blog.created_at).toLocaleString()}</small>
       </div>
       <LoadOptions />

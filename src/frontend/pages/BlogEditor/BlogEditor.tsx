@@ -5,6 +5,7 @@ import CreatePreview from "../../components/CreatePreview/CreatePreview";
 import CreateHighlight from "../../components/CreateHighlight/CreateHighlight";
 import CreateRaw from "../../components/CreateRaw/CreateRaw";
 import { useParams } from "react-router-dom";
+import { usePromptOnUnsaved } from "../../hooks/usePromptOnUnsaved";
 
 type Blog = {
   id: number;
@@ -15,38 +16,41 @@ type Blog = {
 };
 
 export default function PostEditor() {
-  const [lines, setLines] = useState<string[]>([]);
+  const [lines, setLines] = useState<string[]>([""]);
+  const [save, setSave] = useState<string[]>([""]);
+  const [saveState, setsaveState] = useState<boolean>(true);
+  const isUnsaved = JSON.stringify(lines) !== JSON.stringify(save);
   const [title] = useState<string>("Untitled");
   const [highlightTop, setHighlightTop] = useState("300px");
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const fetchBlog = async () => {
-      try {
+    async function fetchBlog() {
+      try { 
         const res = await fetch(`http://localhost:5000/api/blogs/${id}`);
-        if (!res.ok) {
-          throw new Error(`Failed to fetch blog: ${res.statusText}`);
-        }
-        const data: Blog = await res.json();
-        if (data) {
-          setLines(data.content.split("\n"));
-        }
-        console.log(data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Unknown error");
-        }
-      }
-    };
+        if (!res.ok) throw new Error(`Failed to fetch blog: ${res.statusText}`);
 
-    if (id) {
-      fetchBlog();
+        const data: Blog = await res.json();
+        const loadedLines = data.content.split("\n");
+
+        setLines(loadedLines);
+        console.log("setLines called with", loadedLines);
+        setSave(loadedLines);
+      } catch (err) {
+        console.error("Error fetching blog:", err);
+      }
     }
 
-  }, []);
+    if (id) {
+       fetchBlog();
+    }
+    else {
+      setLines([""])
+      setSave(lines);
+    }
+  }, [id]);
 
+  const ignorePromptRef = usePromptOnUnsaved(isUnsaved);
 
   return (
     <div className="pageContainer">
@@ -60,12 +64,17 @@ export default function PostEditor() {
 
       <CreateOptions 
         blog_content={lines} 
-        title={title}/>
+        title={title}
+        saveState={saveState}
+        ignorePromptRef={ignorePromptRef}/>
       <div className="editorContainer">
         <div className="rawContainer">
           <CreateRaw 
+            lines={lines}
             setLines={setLines}
             setHighlightTop={setHighlightTop} 
+            save={save}
+            setSaveState={setsaveState}
           />
           <CreateHighlight highlightTop={highlightTop} />
         </div>
@@ -74,12 +83,3 @@ export default function PostEditor() {
     </div>
   );
 }
-function setError(message: string) {
-  if (message) {
-    throw new Error(message);
-  }
-  else {
-    throw new Error("Function not implemented.");
-  }
-}
-

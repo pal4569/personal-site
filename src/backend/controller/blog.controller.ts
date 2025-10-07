@@ -2,6 +2,13 @@ import { Pool } from "pg";
 import { blogIdParamSchema, createBlogSchema } from "../validation/blogSchemas.ts";
 import type { Request, Response } from "express";
 
+interface Blog {
+  id: number;
+  author: string;
+  title: string;
+  content: string;
+}
+
 export async function initDb(pool: Pool) {
   pool.query(`
     CREATE TABLE IF NOT EXISTS blogs (
@@ -65,14 +72,25 @@ export function postCreate(pool: Pool) {
     try {
       const { author, title, content } = createBlogSchema.parse(req.body);
 
-      const result = await pool.query(
+      const contentString = Array.isArray(content)
+        ? content.join("\n")
+        : content;
+
+      const result = await pool.query<Blog>(
         `INSERT INTO blogs (author, title, content) 
         VALUES ($1, $2, $3) 
         RETURNING *`,
-        [author, title, content]
+        [author, title, contentString]
       );
 
-      res.json(result.rows[0]);
+      const newBlog = result.rows[0];
+      const link = `/blogs/edit/${newBlog.id}`;
+
+      res.json({
+        message: "Blog created successfully",
+        blog: newBlog,
+        link: link
+      });
     } 
     
     catch (err) {
@@ -81,6 +99,58 @@ export function postCreate(pool: Pool) {
     }
   }
 }
+
+export function deleteBlog(pool: Pool) {
+  return async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const result = await pool.query(`DELETE FROM blogs WHERE id = $1 RETURNING *`, [id]);
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({ error: "Blog not found" });
+      }
+
+      res.json({ message: "Blog deleted successfully" });
+    } catch (err) {
+      console.error("Error deleting blog:", err);
+      res.status(500).json({ error: "Failed to delete blog" });
+    }
+  };
+}
+
+export function updateBlog(pool: Pool) {
+  return async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { author, title, content } = req.body;
+
+      const result = await pool.query(
+        `UPDATE blogs
+         SET author = $1, title = $2, content = $3
+         WHERE id = $4
+         RETURNING *`,
+        [author, title, content, id]
+      );
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({ error: "Blog not found" });
+      }
+
+      const updatedBlog = result.rows[0];
+      const link = `/blogs/${updatedBlog.id}`;
+
+      res.json({
+        message: "Blog updated successfully",
+        blog: updatedBlog,
+        link,
+      });
+    } catch (err) {
+      console.error("Error updating blog:", err);
+      res.status(500).json({ error: "Failed to update blog" });
+    }
+  };
+}
+
 
 export function getEdit(pool: Pool) {
   return async (req: Request, res: Response) => {

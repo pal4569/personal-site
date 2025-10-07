@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { ItemProps } from "../../SideBarItem/SidebarItem";
 
 type JustIdTitle = {
@@ -6,8 +6,18 @@ type JustIdTitle = {
   title: string;
 };
 
-export function useSideBarContent(): ItemProps[] {
+interface UseSidebarReturn {
+  layout: ItemProps[];
+  reload: () => void;
+}
+
+export function useSideBarContent(): UseSidebarReturn {
   const [blogs, setBlogs] = useState<JustIdTitle[]>([]);
+  const [reloadFlag, setReloadFlag] = useState(0);
+  
+  const reload = useCallback(() => {
+    setReloadFlag((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     const fetchBlogContent = async () => {
@@ -25,7 +35,7 @@ export function useSideBarContent(): ItemProps[] {
     };
 
     fetchBlogContent();
-  }, []);
+  }, [reloadFlag]);
 
   const layout: ItemProps[] = [
     {
@@ -42,7 +52,7 @@ export function useSideBarContent(): ItemProps[] {
         {
           type: "file",
           name: "Create",
-          navigation: "/create",
+          navigation: "/blogs/new",
           level: 2,
         },
         {
@@ -53,7 +63,7 @@ export function useSideBarContent(): ItemProps[] {
             ? blogs.map((blog) => ({
                 type: "file",
                 name: blog.title,
-                navigation: `/load/${blog.id}`,
+                navigation: `/blogs/${blog.id}`,
                 level: 3,
               }))
             : [],
@@ -62,5 +72,5 @@ export function useSideBarContent(): ItemProps[] {
     },
   ];
 
-  return layout;
+  return {layout, reload};
 }
