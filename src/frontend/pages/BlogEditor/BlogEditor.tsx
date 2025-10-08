@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./BlogEditor.css";
 import CreateOptions from "../../components/CreateOptions/CreateOptions";
 import CreatePreview from "../../components/CreatePreview/CreatePreview";
@@ -20,9 +20,11 @@ export default function PostEditor() {
   const [save, setSave] = useState<string[]>([""]);
   const [saveState, setsaveState] = useState<boolean>(true);
   const isUnsaved = JSON.stringify(lines) !== JSON.stringify(save);
-  const [title] = useState<string>("Untitled");
+  const [title, setTitle] = useState<string>("Untitled");
   const [highlightTop, setHighlightTop] = useState("300px");
   const { id } = useParams<{ id: string }>();
+
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     async function fetchBlog() {
@@ -36,6 +38,8 @@ export default function PostEditor() {
         setLines(loadedLines);
         console.log("setLines called with", loadedLines);
         setSave(loadedLines);
+        setTitle(data.title || "Untitled");
+        if (titleRef.current) titleRef.current.textContent = data.title || "Untitled";
       } catch (err) {
         console.error("Error fetching blog:", err);
       }
@@ -47,6 +51,7 @@ export default function PostEditor() {
     else {
       setLines([""])
       setSave(lines);
+      if (titleRef.current) titleRef.current.textContent = "Untitled";
     }
   }, [id]);
 
@@ -55,12 +60,16 @@ export default function PostEditor() {
   return (
     <div className="pageContainer">
       <h1
+        ref={titleRef}
         className="postTitle"
         contentEditable
         suppressContentEditableWarning
-      >
-        {title}
-      </h1>
+        onInput={(e) => setTitle(e.currentTarget.textContent || "Untitled")}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") e.preventDefault();
+        }}
+        data-placeholder="Untitled"
+      />
 
       <CreateOptions 
         blog_content={lines} 

@@ -35,8 +35,7 @@ export default function CreateOptions({
         ? `http://localhost:5000/api/blogs/${id}`
         : `http://localhost:5000/api/blogs/new`;
 
-      const method = isEditing ? "PUT" : "POST";
-
+      const method = isEditing ? "PUT" : "POST"
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
