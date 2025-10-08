@@ -24,7 +24,6 @@ export function LoadOptions() {
                 throw new Error("Failed to delete blog");
             }
 
-            alert("Blog deleted successfully!");
             reload();
             navigate("/");
         } catch (err) {

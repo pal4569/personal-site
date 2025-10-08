@@ -23,6 +23,7 @@ export default function PostEditor() {
   const [title, setTitle] = useState<string>("Untitled");
   const [highlightTop, setHighlightTop] = useState("300px");
   const { id } = useParams<{ id: string }>();
+  const { ignorePromptRef, setIgnorePrompt } = usePromptOnUnsaved(isUnsaved);
 
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -55,8 +56,6 @@ export default function PostEditor() {
     }
   }, [id]);
 
-  const ignorePromptRef = usePromptOnUnsaved(isUnsaved);
-
   return (
     <div className="pageContainer">
       <h1
@@ -75,7 +74,8 @@ export default function PostEditor() {
         blog_content={lines} 
         title={title}
         saveState={saveState}
-        ignorePromptRef={ignorePromptRef}/>
+        ignorePromptRef={ignorePromptRef}
+        setIgnorePrompt={setIgnorePrompt}/>
       <div className="editorContainer">
         <div className="rawContainer">
           <CreateRaw 

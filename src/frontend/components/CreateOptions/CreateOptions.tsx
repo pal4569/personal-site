@@ -8,11 +8,13 @@ export default function CreateOptions({
   title,
   saveState,
   ignorePromptRef,
+  setIgnorePrompt,
 }: {
   blog_content: string[];
   title: string;
   saveState: boolean;
-  ignorePromptRef: RefObject<boolean>
+  ignorePromptRef: RefObject<boolean>;
+  setIgnorePrompt: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ export default function CreateOptions({
 
   async function handleSave() {
     try {
+      setIgnorePrompt(true);
       ignorePromptRef.current = true;
       const isEditing = window.location.pathname.startsWith("/blogs/edit/");
 
@@ -54,7 +57,7 @@ export default function CreateOptions({
       const new_link = data.link;
 
       reload();
-      
+      await new Promise((r) => setTimeout(r, 10));
       navigate(new_link);
     } finally {
       setTimeout(() => {
