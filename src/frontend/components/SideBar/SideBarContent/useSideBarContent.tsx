@@ -28,12 +28,12 @@ export function useSideBarContent(): UseSidebarReturn {
         }
 
         const data: JustIdTitle[] = await res.json();
+        console.log("Fetched data (reloadFlag =", reloadFlag, "):", data);
         setBlogs(data);
       } catch (err) {
         console.error("Loading blogs failed", err);
       }
     };
-
     fetchBlogContent();
   }, [reloadFlag]);
 

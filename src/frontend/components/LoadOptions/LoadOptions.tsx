@@ -7,6 +7,7 @@ export function LoadOptions() {
     const navigate = useNavigate();
     const { reload } = useSidebar();
     const id = window.location.href.split("/").pop();
+
     function handleEdit() {
         navigate(`/blogs/edit/${id}`)
     }

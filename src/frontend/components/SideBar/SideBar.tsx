@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import File from '../SideBarItem/File/File';
 import Folder from '../SideBarItem/Folder/Folder';
-import { useSideBarContent } from './SideBarContent/useSideBarContent';
+import { useSidebar } from './SideBarContent/useSidebar';
 
 export default function SideBar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
-  const { layout } = useSideBarContent();
+  const { layout } = useSidebar();
 
   return (
     <motion.aside
