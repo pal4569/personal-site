@@ -16,6 +16,7 @@ export default function LoadBlog() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [wordCount, setWordCount] = useState<number>(0);
 
   let lines: string[] | null = null;
   if (blog) {
@@ -23,7 +24,7 @@ export default function LoadBlog() {
   }
 
   useEffect(() => {
-    if (!id) return; // no id in URL
+    if (!id) return;
     const fetchBlog = async () => {
       try {
         const res = await fetch(`http://localhost:5000/api/blogs/${id}`);
@@ -32,6 +33,7 @@ export default function LoadBlog() {
         }
         const data: Blog = await res.json();
         setBlog(data);
+        setWordCount(data?.content?.split(/\s+/).filter(Boolean).length || 0);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -56,6 +58,7 @@ export default function LoadBlog() {
       <div className="pre-content">
         <small>By {blog.author}</small>
         <small>Created: {new Date(blog.created_at).toLocaleString()}</small>
+        <small>{wordCount} Words</small>
       </div>
       <LoadOptions />
       <div className="load-field">

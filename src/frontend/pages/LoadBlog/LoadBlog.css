@@ -2,17 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 4rem;
 }
 
 .title {
-  position: fixed;
+  position: relative;
   text-align: center;
   font-family: 'Inter', sans-serif;
   color: #fabd2f;
-  width: 100%;
-  left: 0%;
-  top: 0%;
 }
 
 .pre-content {
@@ -21,6 +17,7 @@
   flex-direction: row;
   gap: 1rem;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .load-field {
@@ -33,7 +30,7 @@
   line-height: 1.6;
 
   width: 900px;
-  height: 100vh;
+  height: 500vh;
   text-align: left;
   z-index: 1;
   white-space: pre-wrap;
@@ -49,6 +46,10 @@
   width: 100%;
   left: 0%;
   top: 25%;
+}
+
+.empty-line {
+  height: 30px;
 }
 
 .header1,

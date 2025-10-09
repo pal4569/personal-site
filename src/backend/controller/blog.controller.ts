@@ -124,12 +124,16 @@ export function updateBlog(pool: Pool) {
       const { id } = req.params;
       const { author, title, content } = req.body;
 
+      const contentString = Array.isArray(content)
+        ? content.join("\n")
+        : content;
+
       const result = await pool.query(
         `UPDATE blogs
          SET author = $1, title = $2, content = $3
          WHERE id = $4
          RETURNING *`,
-        [author, title, content, id]
+        [author, title, contentString, id]
       );
 
       if (result.rowCount === 0) {

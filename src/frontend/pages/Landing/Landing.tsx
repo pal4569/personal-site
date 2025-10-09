@@ -25,7 +25,7 @@ export default function Landing() {
       </div>
       <div className="desc">
         <p>I recently graduated from Northeastern University with a B.S. in Computer Science. I have a strong foundation in software development, systems programming, and IT infrastructure. Through my co-op experiences and internship work, I’ve gained hands-on exposure to both enterprise-scale IT systems and impactful real-world applications of AI in pediatric diagnostic imaging. </p>
-        <p>At Boston Children’s Hospital, I’m currently contributing to a machine learning pipeline that that automatically estimates limb length discrepancy in children to improve diagnostic accuracy and reduce manual effort for radiologists. Previously at Prime Medicine, I automated IT operations using Python, Bash, and PowerShell, integrating tools like Active Directory, Intune, and Jamf to improve provisioning and compliance workflows. At the Boston Globe, I provided end-user IT support while streamlining onboarding and inventory processes through scripting.</p>
+        <p>At Boston Children’s Hospital, I’m currently contributing to a machine learning pipeline that automatically estimates limb length discrepancy in children to improve diagnostic accuracy and reduce manual effort for radiologists. Previously at Prime Medicine, I automated IT operations using Python, Bash, and PowerShell, integrating tools like Active Directory, Intune, and Jamf to improve provisioning and compliance workflows. At the Boston Globe, I provided end-user IT support while streamlining onboarding and inventory processes through scripting.</p>
       </div>
       <h3>Projects</h3>
       <div className="all-projects">
