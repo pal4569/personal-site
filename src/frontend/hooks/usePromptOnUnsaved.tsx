@@ -15,7 +15,6 @@ export function usePromptOnUnsaved(isUnsaved: boolean) {
   const blocker = useBlocker(isUnsaved && !ignorePromptRef.current);
 
   useEffect(() => {
-    console.log(ignorePromptRef.current);
     if (blocker.state === "blocked") {
       const confirmLeave = window.confirm(
         "You have unsaved changes. Leave anyway?"

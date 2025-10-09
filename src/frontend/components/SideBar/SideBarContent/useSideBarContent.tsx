@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type { ItemProps } from "../../SideBarItem/SidebarItem";
 
 type JustIdTitle = {
@@ -17,6 +17,7 @@ export function useSideBarContent(): UseSidebarReturn {
   
   const reload = useCallback(() => {
     setReloadFlag((prev) => prev + 1);
+    
   }, []);
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export function useSideBarContent(): UseSidebarReturn {
         }
 
         const data: JustIdTitle[] = await res.json();
-        console.log("Fetched data (reloadFlag =", reloadFlag, "):", data);
         setBlogs(data);
       } catch (err) {
         console.error("Loading blogs failed", err);
@@ -37,7 +37,7 @@ export function useSideBarContent(): UseSidebarReturn {
     fetchBlogContent();
   }, [reloadFlag]);
 
-  const layout: ItemProps[] = [
+  const layout = useMemo<ItemProps[]>(() => [
     {
       type: "file",
       name: "Home",
@@ -59,18 +59,16 @@ export function useSideBarContent(): UseSidebarReturn {
           type: "folder",
           name: "Blogs",
           level: 2,
-          children: blogs.length
-            ? blogs.map((blog) => ({
-                type: "file",
-                name: blog.title,
-                navigation: `/blogs/${blog.id}`,
-                level: 3,
-              }))
-            : [],
+          children: blogs.map((blog) => ({
+            type: "file",
+            name: blog.title,
+            navigation: `/blogs/${blog.id}`,
+            level: 3,
+          })),
         },
       ],
     },
-  ];
+  ], [blogs]);
 
   return {layout, reload};
 }

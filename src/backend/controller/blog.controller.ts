@@ -47,10 +47,6 @@ export function getAll(pool: Pool) {
         `SELECT id, title FROM blogs`,
       );
 
-      if (result.rows.length === 0) {
-        return res.status(404).json({ error: "No blogs found" });
-      }
-
       res.json(result.rows);
     } 
     

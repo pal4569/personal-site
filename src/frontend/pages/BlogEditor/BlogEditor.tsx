@@ -37,7 +37,6 @@ export default function PostEditor() {
         const loadedLines = data.content.split("\n");
 
         setLines(loadedLines);
-        console.log("setLines called with", loadedLines);
         setSave(loadedLines);
         setTitle(data.title || "Untitled");
         if (titleRef.current) titleRef.current.textContent = data.title || "Untitled";
