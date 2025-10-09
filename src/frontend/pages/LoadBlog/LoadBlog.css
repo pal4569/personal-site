@@ -12,12 +12,24 @@
 }
 
 .pre-content {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-stuff {
   display: flex;
   flex-direction: row;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.bottom-stuff {
+  margin-top: 0.25rem;
+  text-align: center;
+  align-self: center;
+  font-size: 11px;
 }
 
 .load-field {

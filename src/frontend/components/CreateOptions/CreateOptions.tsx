@@ -20,6 +20,7 @@ export default function CreateOptions({
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { reload } = useSidebar();
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
@@ -59,6 +60,7 @@ export default function CreateOptions({
       reload();
       await new Promise((r) => setTimeout(r, 10));
       navigate(new_link);
+      setLastSaved(data.blog.edited_at);
     } finally {
       setTimeout(() => {
         if (ignorePromptRef.current) ignorePromptRef.current = false;
@@ -68,26 +70,31 @@ export default function CreateOptions({
 
 
   return (
-    <div className="create-options">
-      <button
-        className="option"
-        onClick={handleSave}
-        disabled={saveState}
-      >
-        Save
-      </button>
+    <div className="create-options-page-container">
+      <div className="create-options">
+        <button
+          className="option"
+          onClick={handleSave}
+          disabled={saveState}
+        >
+          Save
+        </button>
 
-      <label htmlFor="file-upload" className="option">
-        Upload Image
-      </label>
-      <input
-        id="file-upload"
-        type="file"
-        onChange={handleChange}
-        style={{ display: "none" }}
-      />
+        <label htmlFor="file-upload" className="option">
+          Upload Image
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          onChange={handleChange}
+          style={{ display: "none" }}
+        />
 
-      {selectedImage && <img src={selectedImage} alt="Uploaded preview" />}
+        {selectedImage && <img src={selectedImage} alt="Uploaded preview" />}
+      </div>
+      <div className="last-saved">
+        {lastSaved && `Saved at ${new Date(lastSaved).toLocaleString()}`}
+      </div>
     </div>
   );
 }

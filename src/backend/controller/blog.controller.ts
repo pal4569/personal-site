@@ -7,6 +7,7 @@ interface Blog {
   author: string;
   title: string;
   content: string;
+  edited_at: Date;
 }
 
 export async function initDb(pool: Pool) {
@@ -16,8 +17,25 @@ export async function initDb(pool: Pool) {
       author VARCHAR(255) NOT NULL,
       title VARCHAR(255) NOT NULL,
       content TEXT NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Function to auto-update edited_at
+    CREATE OR REPLACE FUNCTION update_edited_at_column()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      NEW.edited_at = NOW();
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    -- Trigger that runs before every UPDATE
+    DROP TRIGGER IF EXISTS update_edited_at ON blogs;
+    CREATE TRIGGER update_edited_at
+    BEFORE UPDATE ON blogs
+    FOR EACH ROW
+    EXECUTE FUNCTION update_edited_at_column();
   `);
   console.log("Blogs table is ready");
 }
@@ -141,7 +159,7 @@ export function updateBlog(pool: Pool) {
       }
 
       const updatedBlog = result.rows[0];
-      const link = `/blogs/${updatedBlog.id}`;
+      const link = `/blogs/edit/${updatedBlog.id}`;
 
       res.json({
         message: "Blog updated successfully",

@@ -9,6 +9,7 @@ type Blog = {
   title: string;
   content: string;
   created_at: string; 
+  edited_at: string;
 };
 
 export default function LoadBlog() {
@@ -17,6 +18,7 @@ export default function LoadBlog() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [wordCount, setWordCount] = useState<number>(0);
+  const [lastSaved, setLastSaved] = useState<string>("");
 
   let lines: string[] | null = null;
   if (blog) {
@@ -34,6 +36,7 @@ export default function LoadBlog() {
         const data: Blog = await res.json();
         setBlog(data);
         setWordCount(data?.content?.split(/\s+/).filter(Boolean).length || 0);
+        setLastSaved(data.edited_at);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -56,9 +59,16 @@ export default function LoadBlog() {
     <div className="page-container">
       <h1 className="title">{blog.title}</h1>
       <div className="pre-content">
-        <small>By {blog.author}</small>
-        <small>Created: {new Date(blog.created_at).toLocaleString()}</small>
-        <small>{wordCount} Words</small>
+        <div className="top-stuff">
+          <small>By {blog.author}</small>
+          <small>Created at {new Date(blog.created_at).toLocaleString()}</small>
+          <small>{wordCount} Words</small>
+        </div>
+      {lastSaved && new Date(lastSaved).getTime() !== new Date(blog.created_at).getTime() && (
+        <small className="bottom-stuff">
+          Edited at {new Date(lastSaved).toLocaleString()}
+        </small>
+      )}
       </div>
       <LoadOptions />
       <div className="load-field">
