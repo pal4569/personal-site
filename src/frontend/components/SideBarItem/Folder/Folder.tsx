@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Folder.css';
 import type { FolderProps } from '../SidebarItem';
 import File from '../File/File'
+import Video from '../Video/Video';
 
 
 export default function Folder({ name, children, level }: FolderProps) {
@@ -33,7 +34,19 @@ export default function Folder({ name, children, level }: FolderProps) {
                     level={level + 1}
                   />
                 );
-              } else {
+              } 
+              else if (element.type === "video") {
+                return (
+                  <Video
+                    key={element.name}
+                    type={'video'}
+                    name={element.name}
+                    navigation={element.navigation!}
+                    level={level + 1}
+                  />
+                );
+              } 
+              else {
                 return (
                   <Folder
                     key={element.name}

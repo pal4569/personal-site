@@ -96,7 +96,7 @@ export function useSideBarContent(): UseSidebarReturn {
       name: "Videos",
       level: 1,
       children: videos.map((videos) => ({
-        type: "file",
+        type: "video",
         name: videos.title,
         navigation: `/videos/${videos.id}`,
         level: 2,
