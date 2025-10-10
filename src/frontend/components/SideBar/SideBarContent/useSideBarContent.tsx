@@ -6,6 +6,11 @@ type JustIdTitle = {
   title: string;
 };
 
+type VideoData = {
+  id: number;
+  title: string;
+};
+
 interface UseSidebarReturn {
   layout: ItemProps[];
   reload: () => void;
@@ -13,6 +18,7 @@ interface UseSidebarReturn {
 
 export function useSideBarContent(): UseSidebarReturn {
   const [blogs, setBlogs] = useState<JustIdTitle[]>([]);
+  const [videos, setVideos] = useState<VideoData[]>([]);
   const [reloadFlag, setReloadFlag] = useState(0);
   
   const reload = useCallback(() => {
@@ -35,6 +41,23 @@ export function useSideBarContent(): UseSidebarReturn {
       }
     };
     fetchBlogContent();
+  }, [reloadFlag]);
+
+  useEffect(() => {
+    const fetchVideoContent = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/videos`);
+        if (!res.ok) {
+          throw new Error(`Failed to fetch videos: ${res.statusText}`);
+        }
+
+        const data: VideoData[] = await res.json();
+        setVideos(data);
+      } catch (err) {
+        console.error("Loading videos failed", err);
+      }
+    };
+    fetchVideoContent();
   }, [reloadFlag]);
 
   const layout = useMemo<ItemProps[]>(() => [
@@ -68,7 +91,18 @@ export function useSideBarContent(): UseSidebarReturn {
         },
       ],
     },
-  ], [blogs]);
+    {
+      type: "folder",
+      name: "Videos",
+      level: 1,
+      children: videos.map((videos) => ({
+        type: "file",
+        name: videos.title,
+        navigation: `/videos/${videos.id}`,
+        level: 2,
+      })),
+    },
+  ], [videos]);
 
   return {layout, reload};
 }

@@ -12,4 +12,11 @@ export interface FolderProps {
   level: number; 
 }
 
-export type ItemProps = FileProps | FolderProps;
+export interface VideoProps {
+  type: "video";
+  name: string;
+  navigation: string;
+  level: number;
+}
+
+export type ItemProps = FileProps | FolderProps | VideoProps;

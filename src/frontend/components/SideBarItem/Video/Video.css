@@ -1,0 +1,27 @@
+.video-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+
+.video {
+  font-size: 20px;
+  color: #ebdbb2;
+  transition: color 0.2s ease;
+}
+
+.video:hover {
+  color: #fb4934;
+}
+
+.video.active {
+  color: #8ec07c;
+}
+
+.fas.fa-video {
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+}
+

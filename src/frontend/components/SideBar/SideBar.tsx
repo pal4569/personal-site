@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import File from '../SideBarItem/File/File';
 import Folder from '../SideBarItem/Folder/Folder';
+import Video from '../SideBarItem/Video/Video';
 import { useSidebar } from './SideBarContent/useSidebar';
 
 export default function SideBar() {
@@ -41,6 +42,17 @@ export default function SideBar() {
                 level={element.level}
               />
             );
+          } 
+          else if (element.type === "video") {
+            return (
+              <Video 
+                key={i}
+                type={'video'}
+                name={element.name} 
+                navigation={element.navigation}
+                level={element.level}
+              />
+            )
           } 
           else {
             throw new Error("Unrecognized sidebar type");
