@@ -85,6 +85,14 @@ export default function LoadBlog() {
             );
           }
 
+          else if (line.startsWith("- ")) {                    const content = line.split("- ")[1];
+              return (
+              <div key={i} className={`bullet`}>
+                  {content}
+              </div>
+              )
+          }
+
           if (line.trim() === "") {
             return <div key={i} className="empty-line" />;
           }

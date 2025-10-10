@@ -103,3 +103,14 @@
   font-size: 14px;
 }
 
+.bullet {
+  margin-left: 0.5em;
+}
+
+.bullet::before {
+  content: "•";
+  color: #fabd2f;
+  font-weight: bold;
+  display: inline-block;
+  width: 0.75em;
+}

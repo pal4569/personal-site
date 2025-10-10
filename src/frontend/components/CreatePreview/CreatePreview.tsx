@@ -18,6 +18,15 @@ export default function CreatePreview({ lines }: PreviewProps) {
                     </div>
                     );
                 }
+
+                else if (line.startsWith("- ")) {                    const content = line.split("- ")[1];
+                    return (
+                    <div key={i} className={`bullet`}>
+                        {content}
+                    </div>
+                    )
+                }
+
                 if (line.trim() === "") {
                     return <div key={i} className="i-hate-css-so-much" />;
                 }
