@@ -1,0 +1,10 @@
+.fa-solid.fa-user {
+    position: absolute;
+    left: 97%;
+    font-size: 28px;
+    color: #fbf1c7;
+}
+
+.fa-solid.fa-user:hover {
+  color: #fb4934;
+}

@@ -79,10 +79,6 @@ export default function CreateOptions({
         >
           Save
         </button>
-
-        <label htmlFor="file-upload" className="option">
-          Upload Image
-        </label>
         <input
           id="file-upload"
           type="file"

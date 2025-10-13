@@ -10,6 +10,7 @@ import LoadBlog from "./frontend/pages/LoadBlog/LoadBlog";
 import { Outlet } from "react-router-dom";
 import { SidebarProvider } from "./frontend/components/SideBar/SideBarContent/SidebarProvider";
 import VideoPlayer from "./frontend/pages/VideoPlayer/VideoPlayer";
+import LoginPage from "./frontend/pages/LoginPage/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "create/:id", element: <BlogEditor /> },
       { path: "blogs/:id", element: <LoadBlog /> },
       { path: "videos/:id", element: <VideoPlayer /> },
+      { path: "login", element: <LoginPage /> },
     ],
   },
 ]);

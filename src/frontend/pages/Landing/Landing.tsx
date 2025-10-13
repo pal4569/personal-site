@@ -6,10 +6,12 @@ import strategy from '../../assets/strategy.png'
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
 import { FaEnvelopeSquare } from "react-icons/fa";
+import LoginIcon from '../../components/LoginIcon/LoginIcon'
 
 export default function Landing() {
   return (
     <div className="landing-container">
+      <LoginIcon />
       <h1 className="landing-title">Michael F. Callahan</h1>
       <img src={face} alt="face" />
       <div className="socials-container">

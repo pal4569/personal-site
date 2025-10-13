@@ -15,8 +15,8 @@ export default function SideBar() {
   return (
     <motion.aside
       className="sidebar-container"
-      initial={{ x: -200 }}
-      animate={{ x: sidebarToggle ? 0 : -200 }}
+      initial={{ x: 0 }}
+      animate={{ x: sidebarToggle ? -200 : 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="rectangle">

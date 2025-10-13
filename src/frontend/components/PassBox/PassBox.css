@@ -1,0 +1,9 @@
+.passbox {
+    background: #282828;
+    color: #fbf1c7;
+    border: 1px solid gray;
+    width: 500px; 
+    height: 30px; 
+    text-align: center;
+    font-size: 20px;
+}
