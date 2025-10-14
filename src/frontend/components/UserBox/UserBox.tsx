@@ -1,9 +1,18 @@
 import './UserBox.css';
 
-export default function UserBox() {
+interface UserBoxProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export default function UserBox({ value, onChange }: UserBoxProps) {
     return (
-        <div 
-            className="userbox"
-            contentEditable />
+        <input
+        type="text"
+        className="userbox"
+        placeholder="Username"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        />
     )
 }

@@ -7,6 +7,13 @@ interface MassMsgProps {
 
 export default function PassMsg({show, msg} : MassMsgProps) {
     return (
-        <p className="msg">{show && msg}</p>
+        <p
+            className="msg"
+            style={{
+            color: msg === "login successful" ? "#8ec07c" : "#fb4934",
+            }}
+        >
+        {show && msg}
+        </p>
     );
 }

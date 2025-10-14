@@ -1,12 +1,41 @@
 import './LoadOptions.css'
 import { useNavigate } from 'react-router-dom';
 import { useSidebar } from "../SideBar/SideBarContent/useSidebar";
+import { useState, useEffect } from 'react';
 
 
 export function LoadOptions() {
     const navigate = useNavigate();
     const { reload } = useSidebar();
     const id = window.location.href.split("/").pop();
+    const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/api/secure", {
+                credentials: "include",
+            });
+
+            if (!res.ok) {
+                if (res.status === 401) {
+                console.log("User is not logged in");
+                setLoggedIn(false);
+                return;
+                }
+                throw new Error(`Failed to check auth: ${res.statusText}`);
+            }
+
+            const data = await res.json();
+            console.log("User is logged in:", data.user);
+            setLoggedIn(true);
+            } catch (err) {
+            console.error("Checking auth failed", err);
+        }
+    };
+
+    checkAuth();
+    }, []);
 
     function handleEdit() {
         navigate(`/blogs/edit/${id}`)
@@ -35,10 +64,12 @@ export function LoadOptions() {
         <div className="load-options">
             <button 
                 className="option"
-                onClick={handleEdit}>Edit</button>
+                onClick={handleEdit}
+                disabled={!loggedIn}>Edit</button>
             <button 
                 className="option"
-                onClick={handleDelete}>Delete</button>
+                onClick={handleDelete}
+                disabled={!loggedIn}>Delete</button>
         </div>
     );
 }

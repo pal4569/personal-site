@@ -1,4 +1,4 @@
-import { useState, type RefObject } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import './CreateOptions.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSidebar } from "../SideBar/SideBarContent/useSidebar";
@@ -21,6 +21,7 @@ export default function CreateOptions({
   const { id } = useParams<{ id: string }>();
   const { reload } = useSidebar();
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
@@ -68,6 +69,32 @@ export default function CreateOptions({
     }
   }
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/secure", {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          if (res.status === 401) {
+            console.log("User is not logged in");
+            setLoggedIn(false);
+            return;
+          }
+          throw new Error(`Failed to check auth: ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        console.log("User is logged in:", data.user);
+        setLoggedIn(true);
+      } catch (err) {
+        console.error("Checking auth failed", err);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
     <div className="create-options-page-container">
@@ -75,7 +102,7 @@ export default function CreateOptions({
         <button
           className="option"
           onClick={handleSave}
-          disabled={saveState}
+          disabled={saveState || !loggedIn}
         >
           Save
         </button>
@@ -91,6 +118,7 @@ export default function CreateOptions({
       <div className="last-saved">
         {lastSaved && `Saved at ${new Date(lastSaved).toLocaleString()}`}
       </div>
+       {!loggedIn &&  <p className="unauth-msg">This is a demo. Unauthorized users cannot create, delete, or edit blogs.</p>}
     </div>
   );
 }
