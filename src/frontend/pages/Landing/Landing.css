@@ -99,12 +99,12 @@ h3 {
   width: 250px;
   text-align: center;
   margin: 0;
+  transition: all 0.3s ease;
 }
 
 .projects-container h4 {
   margin: 4px 0 0 0;
 }
-
 
 .projects-container img {
   width: 200px;
@@ -115,6 +115,11 @@ h3 {
   padding: 20px;
   background: #1d2021;
   border-radius: 0px;
+  transition: filter 0.3s ease;
+}
+
+.projects-container:hover img {
+  filter: brightness(1.5);
 }
 
 .project-image {

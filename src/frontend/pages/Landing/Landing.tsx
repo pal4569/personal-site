@@ -7,8 +7,15 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
 import { FaEnvelopeSquare } from "react-icons/fa";
 import LoginIcon from '../../components/LoginIcon/LoginIcon'
+import { useNavigate } from 'react-router-dom'
 
 export default function Landing() {
+  const navigate = useNavigate();
+
+  function handleClickBlog() {
+    navigate("/blogs/15");
+  }
+
   return (
     <div className="landing-container">
       <LoginIcon />
@@ -32,7 +39,9 @@ export default function Landing() {
       <h3>Projects</h3>
       <div className="all-projects">
         <div className="projects-container">
-          <div className="project-title-container">
+          <div 
+            className="project-title-container"
+            onClick={handleClickBlog}>
             <img src={mdblog} alt="face" />
             <h6>Markdown Blog Creator</h6>
           </div>

@@ -4,6 +4,7 @@ import type { FileProps } from '../SidebarItem';
 
 export default function File({name, navigation, level} : FileProps) {
     const navigate = useNavigate();
+    const shortName = name.length < 10 ? name : name.slice(0, 10) + '...';
     return (
         <div 
             className="file-container"
@@ -12,7 +13,7 @@ export default function File({name, navigation, level} : FileProps) {
             <div 
                 className={`file ${location.pathname === navigation ? "active" : ""}`}
                 onClick={() => navigation && navigate(navigation)}
-                >{name}
+                >{shortName}
             </div>
         </div>
     );
