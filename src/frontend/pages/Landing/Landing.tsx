@@ -8,13 +8,23 @@ import { FaGithubSquare } from "react-icons/fa";
 import { FaEnvelopeSquare } from "react-icons/fa";
 import LoginIcon from '../../components/LoginIcon/LoginIcon'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export default function Landing() {
   const navigate = useNavigate();
+  const [date, setDate] = useState<string>("");
 
   function handleClickBlog() {
     navigate("/blogs/15");
   }
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/lastUpdated")
+      .then(res => res.json())
+      .then(data => setDate(new Date(data.date).toLocaleDateString()));
+  }, []);
+
+  console.log(date);
 
   return (
     <div className="landing-container">
@@ -61,6 +71,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
+      <footer>Last updated: {date}</footer>
     </div>
   );
 }
