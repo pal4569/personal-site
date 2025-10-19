@@ -6,11 +6,11 @@ import cookieParser from "cookie-parser";
 import type { JwtPayload } from "jsonwebtoken";
 import { 
   getAll, getLoad, postCreate, getEdit, deleteBlog, updateBlog, initDb 
-} from "./controller/blog.controller.ts";
+} from "./controller/blog.controller.js";
 import { 
   initVideoDb, getAllVideos, getLoadVideo 
-} from "./controller/video.controller.ts";
-import { postLogin, requireAuth } from "./controller/password.controller.ts";
+} from "./controller/video.controller.js";
+import { postLogin, requireAuth } from "./controller/password.controller.js";
 
 interface AuthenticatedRequest extends Request {
   user?: string | JwtPayload;

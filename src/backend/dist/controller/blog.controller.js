@@ -1,14 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.initDb = initDb;
-exports.getAll = getAll;
-exports.getLoad = getLoad;
-exports.postCreate = postCreate;
-exports.deleteBlog = deleteBlog;
-exports.updateBlog = updateBlog;
-exports.getEdit = getEdit;
-const blogSchemas_1 = require("../validation/blogSchemas");
-async function initDb(pool) {
+import { blogIdParamSchema, createBlogSchema } from "../validation/blogSchemas.js";
+export async function initDb(pool) {
     pool.query(`
     CREATE TABLE IF NOT EXISTS blogs (
       id SERIAL PRIMARY KEY,
@@ -37,7 +28,7 @@ async function initDb(pool) {
   `);
     console.log("Blogs table is ready");
 }
-function getAll(pool) {
+export function getAll(pool) {
     return async (req, res) => {
         try {
             const result = await pool.query(`SELECT id, title FROM blogs`);
@@ -49,10 +40,10 @@ function getAll(pool) {
         }
     };
 }
-function getLoad(pool) {
+export function getLoad(pool) {
     return async (req, res) => {
         try {
-            const { id } = blogSchemas_1.blogIdParamSchema.parse(req.params);
+            const { id } = blogIdParamSchema.parse(req.params);
             const result = await pool.query(`SELECT * FROM blogs WHERE id = $1`, [id]);
             if (result.rows.length === 0) {
                 return res.status(404).json({ error: "Blog not found" });
@@ -65,10 +56,10 @@ function getLoad(pool) {
         }
     };
 }
-function postCreate(pool) {
+export function postCreate(pool) {
     return async (req, res) => {
         try {
-            const { author, title, content } = blogSchemas_1.createBlogSchema.parse(req.body);
+            const { author, title, content } = createBlogSchema.parse(req.body);
             const contentString = Array.isArray(content)
                 ? content.join("\n")
                 : content;
@@ -89,7 +80,7 @@ function postCreate(pool) {
         }
     };
 }
-function deleteBlog(pool) {
+export function deleteBlog(pool) {
     return async (req, res) => {
         try {
             const { id } = req.params;
@@ -105,7 +96,7 @@ function deleteBlog(pool) {
         }
     };
 }
-function updateBlog(pool) {
+export function updateBlog(pool) {
     return async (req, res) => {
         try {
             const { id } = req.params;
@@ -134,10 +125,10 @@ function updateBlog(pool) {
         }
     };
 }
-function getEdit(pool) {
+export function getEdit(pool) {
     return async (req, res) => {
         try {
-            const { id } = blogSchemas_1.blogIdParamSchema.parse(req.params);
+            const { id } = blogIdParamSchema.parse(req.params);
             const result = await pool.query(`SELECT * FROM blogs WHERE id = $1`, [id]);
             if (result.rows.length === 0) {
                 return res.status(404).json({ error: "Blog not found" });

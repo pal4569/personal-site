@@ -1,10 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.initVideoDb = initVideoDb;
-exports.getAllVideos = getAllVideos;
-exports.getLoadVideo = getLoadVideo;
-const videoSchema_1 = require("../validation/videoSchema");
-async function initVideoDb(pool) {
+import { videoIdParamSchema } from "../validation/videoSchema.js";
+export async function initVideoDb(pool) {
     pool.query(`
     CREATE TABLE IF NOT EXISTS videos (
       id SERIAL PRIMARY KEY,
@@ -15,7 +10,7 @@ async function initVideoDb(pool) {
   `);
     console.log("Videos table is ready");
 }
-function getAllVideos(pool) {
+export function getAllVideos(pool) {
     return async (req, res) => {
         try {
             const result = await pool.query(`SELECT id, title FROM videos`);
@@ -27,10 +22,10 @@ function getAllVideos(pool) {
         }
     };
 }
-function getLoadVideo(pool) {
+export function getLoadVideo(pool) {
     return async (req, res) => {
         try {
-            const { id } = videoSchema_1.videoIdParamSchema.parse(req.params);
+            const { id } = videoIdParamSchema.parse(req.params);
             const result = await pool.query(`SELECT * FROM videos WHERE id = $1`, [id]);
             if (result.rows.length === 0) {
                 return res.status(404).json({ error: "Blog not found" });
