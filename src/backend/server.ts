@@ -19,11 +19,10 @@ interface AuthenticatedRequest extends Request {
 
 const app = express();
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "cruddb",
-  password: "Agario314!",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 app.use(cors({
