@@ -1,0 +1,51 @@
+# =======================================
+# Node / Build Artifacts
+# =======================================
+node_modules/
+dist/
+build/
+coverage/
+.pnp/
+.pnp.js
+
+# =======================================
+# Environment Variables
+# =======================================
+.env
+.env.*
+!.env.example  # keep your template if you have one
+
+# =======================================
+# Logs
+# =======================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =======================================
+# OS / System files
+# =======================================
+.DS_Store
+Thumbs.db
+
+# =======================================
+# IDE / Editor files
+# =======================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =======================================
+# React / Vite / Next specific (if used)
+# =======================================
+.cache/
+*.tsbuildinfo
