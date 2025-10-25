@@ -1,41 +1,45 @@
 import express from "express";
 import cors from "cors";
-import { Pool } from "pg";
 import dotenv from "dotenv";
+import pkg from "pg";
+const { Pool } = pkg;
+
+import {
+  getAll, getLoad, postCreate, getEdit, deleteBlog, updateBlog, initDb
+} from "./controller/blog.controller";
+import {
+  initVideoDb, getAllVideos, getLoadVideo
+} from "./controller/video.controller";
+import { postLogin, requireAuth } from "./controller/password.controller";
+import { JwtPayload } from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import type { JwtPayload } from "jsonwebtoken";
-import { 
-  getAll, getLoad, postCreate, getEdit, deleteBlog, updateBlog, initDb 
-} from "./controller/blog.controller.js";
-import { 
-  initVideoDb, getAllVideos, getLoadVideo 
-} from "./controller/video.controller.js";
-import { postLogin, requireAuth } from "./controller/password.controller.js";
 
 interface AuthenticatedRequest extends Request {
   user?: string | JwtPayload;
 }
 
+dotenv.config();
 
 const app = express();
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
 
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
 }));
-
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-dotenv.config();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+pool.connect()
+  .then(() => console.log("Connected to Render PostgreSQL"))
+  .catch(err => console.error("Database connection error:", err));
+
+app.get("/api/test", (req, res) => res.send("Server running ✅"));
+
 
 // Blogs
 app.post('/api/blogs/new', postCreate(pool));

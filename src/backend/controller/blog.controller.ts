@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { blogIdParamSchema, createBlogSchema } from "../validation/blogSchemas.js";
+import { blogIdParamSchema, createBlogSchema } from "../validation/blogSchemas";
 import type { Request, Response } from "express";
 
 interface Blog {

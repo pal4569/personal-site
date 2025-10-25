@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { Pool } from "pg";
-import { videoIdParamSchema } from "../validation/videoSchema.js";
+import { videoIdParamSchema } from "../validation/videoSchema";
 
 export async function initVideoDb(pool: Pool) {
   pool.query(`
