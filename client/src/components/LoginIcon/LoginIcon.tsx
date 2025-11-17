@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import './LoginIcon.css';
 import { useState, useEffect } from 'react';
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function LoginIcon() {
     const navigate = useNavigate();
     const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
@@ -11,7 +13,7 @@ export default function LoginIcon() {
 
     async function handleSignout() {
         try {
-            const res = await fetch("http://localhost:5000/api/signout", {
+            const res = await fetch(`${API}/api/signout`, {
                 method: "POST",
                 credentials: "include",
             });
@@ -31,7 +33,7 @@ export default function LoginIcon() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/secure", {
+                const res = await fetch(`${API}/api/secure`, {
                     credentials: "include",
                 });
 

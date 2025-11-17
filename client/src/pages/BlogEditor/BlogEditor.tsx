@@ -15,6 +15,8 @@ type Blog = {
   created_at: string; 
 };
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function PostEditor() {
   const [lines, setLines] = useState<string[]>([""]);
   const [save, setSave] = useState<string[]>([""]);
@@ -30,7 +32,7 @@ export default function PostEditor() {
   useEffect(() => {
     async function fetchBlog() {
       try { 
-        const res = await fetch(`http://localhost:5000/api/blogs/${id}`);
+        const res = await fetch(`${API}/api/blogs/${id}`);
         if (!res.ok) throw new Error(`Failed to fetch blog: ${res.statusText}`);
 
         const data: Blog = await res.json();

@@ -9,6 +9,8 @@ type Video = {
   description: string; 
 };
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function VideoPlayer() {
   const { id } = useParams<{ id: string }>();
   const [video, setVideo] = useState<Video | null>(null);
@@ -19,7 +21,7 @@ export default function VideoPlayer() {
     if (!id) return;
     const fetchVideo = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/videos/${id}`);
+        const res = await fetch(`${API}/api/videos/${id}`);
         if (!res.ok) {
           throw new Error(`Failed to fetch video: ${res.statusText}`);
         }

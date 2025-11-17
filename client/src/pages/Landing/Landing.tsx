@@ -10,6 +10,8 @@ import LoginIcon from '../../components/LoginIcon/LoginIcon'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function Landing() {
   const navigate = useNavigate();
   const [date, setDate] = useState<string>("");
@@ -19,7 +21,7 @@ export default function Landing() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/lastUpdated")
+    fetch(`${API}/api/lastUpdated`)
       .then(res => res.json())
       .then(data => setDate(new Date(data.date).toLocaleDateString()));
   }, []);

@@ -12,6 +12,8 @@ type Blog = {
   edited_at: string;
 };
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function LoadBlog() {
   const { id } = useParams<{ id: string }>();
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -29,7 +31,7 @@ export default function LoadBlog() {
     if (!id) return;
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/blogs/${id}`);
+        const res = await fetch(`${API}/api/blogs/${id}`);
         if (!res.ok) {
           throw new Error(`Failed to fetch blog: ${res.statusText}`);
         }

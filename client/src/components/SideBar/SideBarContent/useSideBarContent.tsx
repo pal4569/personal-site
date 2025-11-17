@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import type { ItemProps } from "../../SideBarItem/SidebarItem";
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 type JustIdTitle = {
   id: number;
   title: string;
@@ -29,7 +31,7 @@ export function useSideBarContent(): UseSidebarReturn {
   useEffect(() => {
     const fetchBlogContent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/blogs`);
+        const res = await fetch(`${API}/api/blogs`);
         if (!res.ok) {
           throw new Error(`Failed to fetch blogs: ${res.statusText}`);
         }
@@ -46,7 +48,7 @@ export function useSideBarContent(): UseSidebarReturn {
   useEffect(() => {
     const fetchVideoContent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/videos`);
+        const res = await fetch(`${API}/api/videos`);
         if (!res.ok) {
           throw new Error(`Failed to fetch videos: ${res.statusText}`);
         }

@@ -3,6 +3,8 @@ import './CreateOptions.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSidebar } from "../SideBar/SideBarContent/useSidebar";
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function CreateOptions({
   blog_content,
   title,
@@ -37,8 +39,8 @@ export default function CreateOptions({
       const isEditing = window.location.pathname.startsWith("/blogs/edit/");
 
       const url = isEditing
-        ? `http://localhost:5000/api/blogs/${id}`
-        : `http://localhost:5000/api/blogs/new`;
+        ? `${API}/api/blogs/${id}`
+        : `${API}/api/blogs/new`;
 
       const method = isEditing ? "PUT" : "POST"
       const response = await fetch(url, {
@@ -72,7 +74,7 @@ export default function CreateOptions({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/secure", {
+        const res = await fetch(`${API}/api/secure`, {
           credentials: "include",
         });
 

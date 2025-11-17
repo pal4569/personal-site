@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSidebar } from "../SideBar/SideBarContent/useSidebar";
 import { useState, useEffect } from 'react';
 
+const API = import.meta.env.VITE_SERVER_URL;
 
 export function LoadOptions() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export function LoadOptions() {
   useEffect(() => {
     const checkAuth = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/secure", {
+            const res = await fetch(`${API}/api/secure`, {
                 credentials: "include",
             });
 
@@ -45,7 +46,7 @@ export function LoadOptions() {
         if (!confirmDelete) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
+            const response = await fetch(`${API}/api/blogs/${id}`, {
                 method: "DELETE",
             });
 

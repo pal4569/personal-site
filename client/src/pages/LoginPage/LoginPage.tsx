@@ -4,6 +4,8 @@ import PassBox from '../../components/PassBox/PassBox';
 import PassMsg from '../../components/PassMsg/PassMsg';
 import { useState } from 'react';
 
+const API = import.meta.env.VITE_SERVER_URL;
+
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +15,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        const res = await fetch('http://localhost:5000/api/login', {
+        const res = await fetch(`${API}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: "include",

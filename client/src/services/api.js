@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API = import.meta.env.VITE_SERVER_URL;
 
 export async function getItems() {
   const res = await fetch(`${API_URL}/blogs`);
@@ -6,7 +6,7 @@ export async function getItems() {
 }
 
 export async function createItem(name) {
-  const res = await fetch(`${API_URL}/api/items`, {
+  const res = await fetch(`${API}/api/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name })
