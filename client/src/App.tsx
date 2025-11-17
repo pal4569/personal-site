@@ -38,7 +38,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: import.meta.env.MODE === "production" ? "/personal-site" : "/",
+    basename: "/",
   }
 );
 
