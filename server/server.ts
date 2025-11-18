@@ -30,9 +30,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(cors());  // already added above
-app.options("/api/*", cors());  // express5-safe pattern
-
 app.use(express.json());
 app.use(cookieParser());
 
