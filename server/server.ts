@@ -10,7 +10,6 @@ import {
 import {
   initVideoDb, getAllVideos, getLoadVideo
 } from "./controller/video.controller";
-
 import { postLogin, requireAuth } from "./controller/password.controller";
 import { JwtPayload } from "jsonwebtoken";
 import cookieParser from "cookie-parser";
@@ -22,10 +21,6 @@ interface AuthenticatedRequest extends Request {
 dotenv.config();
 const app = express();
 
-/* --------------------------------------------------
-   🔥 FIX #1 — FULLY OPEN CORS IN PRODUCTION
-   Render + Vercel require dynamic origin validation
--------------------------------------------------- */
 app.use(cors({
   origin: (origin, callback) => {
     // Allow server-to-server, Postman, etc.
@@ -35,15 +30,12 @@ app.use(cors({
   credentials: true,
 }));
 
-// Handle preflight (OPTIONS) requests globally
-app.options("*", cors());
+app.use(cors());  // already added above
+app.options("/api/*", cors());  // express5-safe pattern
 
 app.use(express.json());
 app.use(cookieParser());
 
-/* --------------------------------------------------
-   Database
--------------------------------------------------- */
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { require: true, rejectUnauthorized: false }
@@ -53,10 +45,8 @@ pool.connect()
   .then(() => console.log("Connected to Render PostgreSQL"))
   .catch(err => console.error("Database connection error:", err));
 
-/* --------------------------------------------------
-   Routes
--------------------------------------------------- */
 app.get("/api/test", (req, res) => res.send("Server running ✅"));
+
 
 // Blogs
 app.post('/api/blogs/new', postCreate(pool));
@@ -70,7 +60,7 @@ app.put("/api/blogs/:id", updateBlog(pool));
 app.get("/api/videos", getAllVideos(pool));
 app.get("/api/videos/:id", getLoadVideo(pool));
 
-// Auth
+// Passwords
 app.post("/api/login", postLogin());
 app.get("/api/secure", requireAuth, (req, res) => {
   const userReq = req as unknown as AuthenticatedRequest;
@@ -82,17 +72,22 @@ app.post("/api/signout", (req, res) => {
   res.status(200).json({ message: "Logged out" });
 });
 
-// Last updated
 app.get("/api/lastUpdated", async (req, res) => {
   try {
     const repo = "pal4569/personal-site";
     const url = `https://api.github.com/repos/${repo}/commits?per_page=1`;
 
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.statusText}`);
+    }
 
     const data = await response.json();
-    const latest = data[0];
+    console.log("GitHub response:", data);
+    const [latest] = data;
+    const date = latest.commit?.author?.date || null;
+    console.log("Extracted date:", date);
+
     res.json({ date: latest.commit.author.date });
   } catch (err) {
     console.error("Error fetching last updated date:", err);
@@ -100,15 +95,9 @@ app.get("/api/lastUpdated", async (req, res) => {
   }
 });
 
-/* --------------------------------------------------
-   Initialize DB
--------------------------------------------------- */
 initDb(pool).catch(err => console.error("DB init failed:", err));
 initVideoDb(pool).catch(err => console.error("DB init failed:", err));
 
-/* --------------------------------------------------
-   Start server
--------------------------------------------------- */
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
