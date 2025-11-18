@@ -19,21 +19,20 @@ interface AuthenticatedRequest extends Request {
 }
 
 dotenv.config();
-
 const app = express();
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://personal-site-c9zz.vercel.app",
-  ],
+  origin: (origin, callback) => {
+    // Allow server-to-server, Postman, etc.
+    if (!origin) return callback(null, true);
+    return callback(null, true); // Reflect origin automatically
+  },
   credentials: true,
 }));
 
+app.options("*", cors());
 app.use(express.json());
 app.use(cookieParser());
-
-const isProduction = process.env.NODE_ENV === "production";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
