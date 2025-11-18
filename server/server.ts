@@ -71,7 +71,7 @@ app.post("/api/signout", (req, res) => {
 
 app.get("/api/lastUpdated", async (req, res) => {
   try {
-    const repo = "pal4569/personal-site";
+    const repo = "pal4569/michaelfc-site";
     const url = `https://api.github.com/repos/${repo}/commits?per_page=1`;
 
     const response = await fetch(url);
