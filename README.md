@@ -13,5 +13,5 @@ Planned features include:
 ## Purpose
 This site is a space to document my work, experiments, and thoughts — part portfolio, part blog, and always evolving.
 
-<img width="1920" height="991" alt="Screenshot From 2025-10-10 16-18-32" src="https://github.com/user-attachments/assets/78b8a67e-c4ba-4f9e-8577-5570b9170973" />
+<img width="1912" height="992" alt="Screenshot From 2025-11-17 21-15-45" src="https://github.com/user-attachments/assets/5a66339e-03ba-43af-8708-c6b9836292e7" />
 <img width="1904" height="988" alt="Screenshot From 2025-09-30 16-21-20" src="https://github.com/user-attachments/assets/449853ba-e120-4178-a104-8b8dff002be9" />
