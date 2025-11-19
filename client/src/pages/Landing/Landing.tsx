@@ -45,8 +45,13 @@ export default function Landing() {
         </a>
       </div>
       <div className="desc">
-        <p>Hi, I'm Michael! I'm an incoming Software Engineer at Travelers Insurance as part of the Engineering Development Program. I'm currently finishing up my Computer Science degree at Northeastern University.</p>
-        <p>I've previously worked at Boston Children's Hospital as a AI Software Researcher, Prime Medicine as a IT Analyst co-op, and The Boston Globe as a IT Support co-op.</p>
+        <p>Hi, I'm Michael! I'm joining Travelers as a Software Engineer in the Engineering Development Program while completing my Computer Science degree at Northeastern University.</p>
+        <p>I've previously worked at: </p>
+        <ul>
+          <li>Boston Children's Hospital as an AI Software Research Assistant.</li>
+          <li>Prime Medicine as an IT Analyst Co-op.</li>
+          <li>Boston Globe Media as an IT Support Co-op.</li>
+        </ul>
         <p>I'm passionate about turning real human needs into thoughtful, useful tech solutions. </p>
       </div>
       <h3>Projects</h3>
@@ -78,3 +83,5 @@ export default function Landing() {
     </div>
   );
 }
+
+//        <p>I've previously worked at Boston Children's Hospital as a AI Software Researcher, Prime Medicine as a IT Analyst co-op, and The Boston Globe as a IT Support co-op.</p>

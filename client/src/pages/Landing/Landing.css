@@ -42,6 +42,22 @@ p {
   background: #1d2021;
 }
 
+.desc ul {
+  list-style: disc;
+  margin-left: 1rem;
+  color: #fbf1c7;
+}
+
+.desc ul li {
+  padding-left: 0rem; /* space between bullet → text */
+}
+
+
+.desc ul li::marker {
+  color: #fbf1c7;
+  font-size: 1.2rem;
+}
+
 .socials-container {
   display: flex;
   flex-direction: row;
